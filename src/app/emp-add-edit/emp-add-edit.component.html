@@ -1,0 +1,136 @@
+<div mat-dialog-title>
+    <h1>Order</h1>
+</div>
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <input type="text"
+                       placeholder="Employee*"
+                       aria-label="Number"
+                       matInput
+                       formControlName="employee"
+                       [matAutocomplete]="employeeAuto" />
+                <mat-autocomplete #employeeAuto="matAutocomplete"
+                                  (optionSelected)="employeeSelected($event)"
+                                  [displayWith]="showEmployee">
+                  <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                    {{option.fullName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              
+              <mat-form-field class="example-full-width" appearance="fill">
+                <input type="text"
+                       placeholder="Shipper*"
+                       aria-label="Number"
+                       matInput
+                       formControlName="shipper"
+                       [matAutocomplete]="shipperAuto" />
+                <mat-autocomplete #shipperAuto="matAutocomplete"
+                                  (optionSelected)="shipperSelected($event)"
+                                  [displayWith]="showShipper">
+                  <mat-option *ngFor="let option of filteredShippers" [value]="option">
+                    {{option.companyName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Ship Name*</mat-label>
+                <input matInput type="text" placeholder="Ex. test@gmail.com" formControlName="shipName">
+            </mat-form-field>
+        </div>
+       
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Ship Address*</mat-label>
+                <input matInput type="text" placeholder="Ex. test@gmail.com" formControlName="shipAddress">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Ship City*</mat-label>
+                <input matInput placeholder="Ex. Babaji" formControlName="shipCity">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Ship Country*</mat-label>
+                <input matInput placeholder="Ex. Babaji" formControlName="shipCountry">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field>
+                <mat-label>Order Date*</mat-label>
+                <input matInput [matDatepicker]="pickerOrderDate" formControlName="pickerOrderDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerOrderDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerOrderDate></mat-datepicker>
+              </mat-form-field>
+            <mat-form-field>
+                <mat-label>Required Date</mat-label>
+                <input matInput [matDatepicker]="pickerRequiredDate" formControlName="pickerRequiredDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerRequiredDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerRequiredDate></mat-datepicker>
+              </mat-form-field>
+            <mat-form-field>
+                <mat-label>Shipped Date</mat-label>
+                <input matInput [matDatepicker]="pickerShippedDate" formControlName="pickerShippedDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerShippedDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerShippedDate></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Freight*</mat-label>
+                <input matInput type="text" placeholder="Ex. test@gmail.com" formControlName="freight">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-radio-group aria-label="Select an option" formControlName="gender">
+                <mat-label><b>Order Details</b></mat-label>
+            </mat-radio-group>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <input type="text"
+                       placeholder="Product"
+                       aria-label="Number"
+                       matInput
+                       formControlName="product"
+                       [matAutocomplete]="productAuto" />
+                <mat-autocomplete #productAuto="matAutocomplete"
+                                  (optionSelected)="productSelected($event)"
+                                  [displayWith]="showproduct">
+                  <mat-option *ngFor="let option of filteredProducts" [value]="option">
+                    {{option.productName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Unit Price</mat-label>
+                <input matInput type="text" placeholder="Ex. test@gmail.com" formControlName="unitPrice">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <input matInput placeholder="Ex. Babaji" formControlName="quantity">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Discount</mat-label>
+                <input matInput placeholder="Ex. Babaji" formControlName="discount">
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Close</button>
+        <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+    </div>
+</form>
